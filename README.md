@@ -37,7 +37,7 @@ The **Restaurant Order System** is designed to manage and streamline the process
 
 ## Contributors
 
-- [Mahmoud Raslan](https://github.com/Ma7mod-Raslan) - Team Lead
+- [Mahmoud Raslan](https://www.linkedin.com/in/ma7mod-raslan/) - Team Lead
 - **Mahmoud Ashraf** - Team Member
 - **Mohammed Yasser** - Team Member
 - **Heba Gamal** - Team Member
