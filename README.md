@@ -35,8 +35,10 @@ The **Restaurant Order System** is designed to manage and streamline the process
 ### 5. Other Classes
 - Review, Menu, PaymentTransaction, Invoice, Discount, Subscription, Address, Category, Delivery, Cart.
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Ma7mod-Raslan/restaurant-order-system.git
-   cd restaurant-order-system
+## Contributors
+
+- [Mahmoud Raslan](https://github.com/Ma7mod-Raslan) - Team Lead
+- **Mahmoud Ashraf** - Team Member
+- **Mohammed Yasser** - Team Member
+- **Heba Gamal** - Team Member
+- **Samar Elshahat** - Team Member
