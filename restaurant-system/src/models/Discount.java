@@ -7,8 +7,6 @@ package models;
 import java.util.Date;
 
 public class Discount {
-
-    // Data Members
     private double discountPercentage;
     private String discountCode;
     private Date validUntil;
@@ -20,48 +18,50 @@ public class Discount {
         this.validUntil = validUntil;
     }
 
-    // Method to apply the discount to an order
+    // Check if the discount is valid
+    public boolean isValid() {
+        Date currentDate = new Date();
+        return currentDate.before(validUntil);
+    }
+
+    // Apply discount to an order
     public void applyDiscount(Order order) {
         if (isValid()) {
-            order.applyDiscount(this); // Apply discount to the order if it's valid
+            double discountAmount = order.getTotalPrice() * (discountPercentage / 100);
+            double newTotalPrice = order.getTotalPrice() - discountAmount;
+            order.setTotalPrice(newTotalPrice);
+            System.out.println("Discount of " + discountPercentage + "% applied. New total price: " + newTotalPrice);
+        } else {
+            System.out.println("Discount is not valid.");
         }
     }
 
-    // Method to check if the discount is still valid
-    public boolean isValid() {
-        Date currentDate = new Date(); // Get current date
-        return !currentDate.after(validUntil); // Check if the current date is before the discount expiration date
-    }
+    // Getters and setters if needed
 
-    // Getter for discountPercentage
     public double getDiscountPercentage() {
         return discountPercentage;
     }
 
-    // Getter for discountCode
-    public String getDiscountCode() {
-        return discountCode;
-    }
-
-    // Setter for discountPercentage
     public void setDiscountPercentage(double discountPercentage) {
         this.discountPercentage = discountPercentage;
     }
 
-    // Setter for discountCode
+    public String getDiscountCode() {
+        return discountCode;
+    }
+
     public void setDiscountCode(String discountCode) {
         this.discountCode = discountCode;
     }
 
-    // Setter for validUntil
+    public Date getValidUntil() {
+        return validUntil;
+    }
+
     public void setValidUntil(Date validUntil) {
         this.validUntil = validUntil;
     }
-
-    // Optional: toString method to print Discount details
-    @Override
-    public String toString() {
-        return "Discount Code: " + discountCode + ", Percentage: " + discountPercentage + "%, Valid Until: " + validUntil;
-    }
+    
 }
+
 
