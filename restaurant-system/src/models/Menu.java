@@ -20,13 +20,13 @@ public class Menu {
     }
 
     
-    public void addItem(Item item) {
+    protected void addItem(Item item) {
         items.add(item);
         System.out.println(item.getName() + " has been added to the menu.");
     }
 
     
-    public void removeItem(Item item) {
+    protected void removeItem(Item item) {
         if (items.remove(item)) {
             System.out.println(item.getName() + " has been removed from the menu.");
         } else {
@@ -35,7 +35,7 @@ public class Menu {
     }
 
     
-    public void updateItem(Item item, double newPrice) {
+    protected void updateItem(Item item, double newPrice) {
         if (items.contains(item)) {
             item.setPrice(newPrice);
             System.out.println(item.getName() + " has been updated with a new price.");

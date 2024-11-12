@@ -17,11 +17,11 @@ public class User {
     private String userID;
     private String username;
     private String password;
-    private String address;
+    private Address address;
     private boolean isEliteCustomer;  // True if the user is subscribed to Elite service
     private List<Order> orderHistory; // List to store orders placed by the user
 // Constructor
-    public User(String name, String userID, String username, String password, String address) {
+    public User(String name, String userID, String username, String password, Address address) {
         this.name = name;
         this.userID = userID;
         this.username = username;
@@ -65,11 +65,11 @@ public class User {
         this.password = password;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -95,7 +95,7 @@ public class User {
         }
     }
 //Method 2(  Update profile details)
- public void updateProfile(String newAddress, String newPassword) {
+ public void updateProfile(Address newAddress, String newPassword) {
         this.address = newAddress;
         this.password = newPassword;
         System.out.println("Profile updated successfully.");
