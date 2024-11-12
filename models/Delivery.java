@@ -2,18 +2,18 @@
 package com.mycompany.delivery;
 import java.util.Date;
 
-/**
- *
- * @Mohamed Yasser
+/*
+    @author moham
  */
 public class Delivery {
-
+    
     // Fields
     private int deliveryID;
-    private Order order;
-    private Address deliveryAddress;
+    private Order order;              // Associated Order
+    private Address deliveryAddress; // Delivery address from Order
     private Date estimatedDeliveryTime;
-    private String deliveryStatus;
+    private DeliveryStatus deliveryStatus;
+    // private String deliveryStatus;   Status: "Preparing", "On the Way", "Delivered", etc.
 
     // Constructor
     public Delivery(int deliveryID, Order order, Address deliveryAddress, Date estimatedDeliveryTime) {
@@ -22,6 +22,11 @@ public class Delivery {
         this.deliveryAddress = deliveryAddress;
         this.estimatedDeliveryTime = estimatedDeliveryTime;
         this.deliveryStatus = DeliveryStatus.PENDING;
+             /*
+                this.deliveryAddress = order.getDeliveryAddress();
+                this.deliveryStatus = "Preparing";  // Default initial status
+                this.estimatedDeliveryTime = new Date();  // Set initial estimate (customize as needed)
+             */
     }
 
     // Getters and Setters
@@ -66,16 +71,15 @@ public class Delivery {
         this.estimatedDeliveryTime = new Date(estimatedTime);
         System.out.println("Estimated delivery time set to: " + estimatedDeliveryTime);
     }
-
+    
 }
 
-
-// Additional Part 
-
-//public enum DeliveryStatus {
-//    PENDING,
-//    DISPATCHED,
-//    IN_TRANSIT,
-//    DELIVERED,
-//    CANCELLED
-//}
+/*
+    public enum DeliveryStatus {
+        PENDING,
+        DISPATCHED,
+        IN_TRANSIT,
+        DELIVERED,
+        CANCELLED
+    }
+*/
