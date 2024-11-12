@@ -3,16 +3,15 @@ package com.mycompany.cart;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @Mohamed Yasser
+/*
+    @author Mohamed Yasser
  */
 public class Cart {
     
     // Attributes
     private int cartID;
-    private User user; // Reference to the associated User
-    private List<Item> cartItems; // List to store items added to the cart
+    private User user; // Reference to the associated User ==  Reference to User who owns the cart
+    private List<Item> cartItems; // List to store items added to the cart == Items in the cart
 
     // Constructor
     public Cart(int cartID, User user) {
@@ -37,6 +36,17 @@ public class Cart {
         }
     }
 
+       /*
+       // Remove an item from the cart
+    public void removeItem(Item item) {
+        if (cartItems.remove(item)) {
+            System.out.println("Item '" + item.getName() + "' removed from cart.");
+        } else {
+            System.out.println("Item '" + item.getName() + "' not found in cart.");
+        }
+    }
+       */
+
     // Method to calculate the total cost of items in the cart
     public double calculateTotal() {
         double total = 0;
@@ -46,6 +56,7 @@ public class Cart {
         return total;
     }
 
+/*
     // Method to apply a discount (if applicable)
     public double applyDiscount(double discountPercentage) {
         double total = calculateTotal();
@@ -70,6 +81,7 @@ public class Cart {
             System.out.println("- " + item.getName() + " : " + item.getPrice());
         }
     }
+*/
 
     // Getters and Setters
     public int getCartID() {
