@@ -13,7 +13,7 @@ public class Delivery {
     private Order order;
     private Address deliveryAddress;
     private Date estimatedDeliveryTime;
-    private DeliveryStatus deliveryStatus;
+    private String deliveryStatus;
 
     // Constructor
     public Delivery(int deliveryID, Order order, Address deliveryAddress, Date estimatedDeliveryTime) {
