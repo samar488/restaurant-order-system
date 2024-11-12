@@ -52,7 +52,7 @@ public class Address {
 
     // Validate the address fields
     public boolean validate() {
-        boolean isValid = !street.isEmpty() && !city.isEmpty() && !state.isEmpty() && !postalCode.isEmpty() && !country.isEmpty();
+        boolean isValid = !street.isEmpty() && !city.isEmpty() && !postalCode.isEmpty() && !country.isEmpty();
         if (isValid) {
             System.out.println("Address is valid.");
         } else {
@@ -68,7 +68,6 @@ public class Address {
     return "Address:\n" +
            "Street: " + street + "\n" +
            "City: " + city + "\n" +
-           "State: " + state + "\n" +
            "Postal Code: " + postalCode + "\n" +
            "Country: " + country;
    }
