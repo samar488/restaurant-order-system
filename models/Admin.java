@@ -2,12 +2,11 @@
 package com.mycompany.admin;
 import java.util.List;
 
-/**
- *
- * @Mohamed Yasser
- */
+/*
+    @author Mohamed Yasser
+*/
 public class Admin {
-    
+
     // Fields
     private int adminID;
     private String name;
@@ -64,11 +63,14 @@ public class Admin {
         System.out.println("Admin updated item: " + item.getName() + " to new price: " + newPrice);
     }
 
+
+    /*
     // Method for Viewing Reports
     public void viewReports(Report report) {
         report.generateReport();
         System.out.println("Report viewed by Admin.");
     }
+    */
 
     
 }
