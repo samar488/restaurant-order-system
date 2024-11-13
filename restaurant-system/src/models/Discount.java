@@ -4,40 +4,40 @@
  */
 package models;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Discount {
     private double discountPercentage;
     private String discountCode;
-    private Date validUntil;
+    private LocalDate validUntil;
 
     // Constructor
-    public Discount(double discountPercentage, String discountCode, Date validUntil) {
+    public Discount(double discountPercentage, String discountCode, LocalDate validUntil) {
         this.discountPercentage = discountPercentage;
         this.discountCode = discountCode;
         this.validUntil = validUntil;
     }
 
-    // Check if the discount is valid
+    // Method to check if the discount is valid
     public boolean isValid() {
-        Date currentDate = new Date();
-        return currentDate.before(validUntil);
+        LocalDate currentDate = LocalDate.now(); // Current date without time
+        return currentDate.isBefore(validUntil);
     }
-
-    // Apply discount to an order
+    
+    // Method to apply the discount to an order
     public void applyDiscount(Order order) {
         if (isValid()) {
-            double discountAmount = order.getTotalPrice() * (discountPercentage / 100);
-            double newTotalPrice = order.getTotalPrice() - discountAmount;
-            order.setTotalPrice(newTotalPrice);
-            System.out.println("Discount of " + discountPercentage + "% applied. New total price: " + newTotalPrice);
+            double originalPrice = order.getTotalPrice();
+            double discountAmount = originalPrice * (discountPercentage / 100);
+            double newPrice = originalPrice - discountAmount;
+            order.setTotalPrice(newPrice);
+            System.out.println("Discount of " + discountPercentage + "% applied. New total price: " + newPrice);
         } else {
-            System.out.println("Discount is not valid.");
+            System.out.println("Discount is not valid. No discount applied.");
         }
     }
 
-    // Getters and setters if needed
-
+    // Getters and Setters
     public double getDiscountPercentage() {
         return discountPercentage;
     }
@@ -54,14 +54,13 @@ public class Discount {
         this.discountCode = discountCode;
     }
 
-    public Date getValidUntil() {
+    
+
+    public LocalDate getValidUntil() {
         return validUntil;
     }
 
-    public void setValidUntil(Date validUntil) {
+    public void setValidUntil(LocalDate validUntil) {
         this.validUntil = validUntil;
     }
-    
 }
-
-

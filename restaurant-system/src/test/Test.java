@@ -6,6 +6,7 @@ package test;
 import models.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 /**
  *
  * @author MRaslanPC
@@ -64,10 +65,12 @@ public class Test {
         
         
         
+        // Create a discount valid from November 1, 2024, to November 30, 2024
+        LocalDate endDate = LocalDate.of(2024, 11, 30);
         
-        // Create Discount and Apply
-        //Discount discount = new Discount(10.0, "DISCOUNT10", "2024-12-01");
-        //discount.applyDiscount(order1); // Apply discount to order1
+//        Create Discount and Apply
+        Discount discount = new Discount(10.0, "DISCOUNT10", endDate);
+        discount.applyDiscount(order1); // Apply discount to order1
         
         // Display Total after Discount
         System.out.println("\nOrder 1 after discount:");
