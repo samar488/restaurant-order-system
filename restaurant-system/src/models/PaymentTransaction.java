@@ -4,7 +4,7 @@
  */
 package models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class PaymentTransaction {
     // Data Members
@@ -15,7 +15,7 @@ public class PaymentTransaction {
     private double totalCost;
     private String transactionType;
     private String transactionStatus;
-    private Date transactionDate;
+    private LocalDateTime transactionDate; // Updated to use LocalDateTime
     private boolean isDiscountApplied;
 
     // Constructor
@@ -26,7 +26,7 @@ public class PaymentTransaction {
         this.amount = amount;
         this.transactionType = transactionType;
         this.transactionStatus = "PENDING";
-        this.transactionDate = new Date();
+        this.transactionDate = LocalDateTime.now(); // Set current date and time
         this.isDiscountApplied = false;
         this.totalCost = calculateTotalCost();
     }
@@ -60,7 +60,7 @@ public class PaymentTransaction {
         System.out.println("Total Cost: $" + totalCost);
         System.out.println("Transaction Type: " + transactionType);
         System.out.println("Transaction Status: " + transactionStatus);
-        System.out.println("Transaction Date: " + transactionDate);
+        System.out.println("Transaction Date: " + transactionDate); // LocalDateTime includes date and time
     }
 
     // Method to generate a unique transaction ID
@@ -102,7 +102,7 @@ public class PaymentTransaction {
         return transactionStatus;
     }
 
-    public Date getTransactionDate() {
+    public LocalDateTime getTransactionDate() { // Updated getter
         return transactionDate;
     }
 
@@ -110,4 +110,3 @@ public class PaymentTransaction {
         return isDiscountApplied;
     }
 }
-

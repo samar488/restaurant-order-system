@@ -4,32 +4,32 @@
  */
 package models;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Date;
 
 public class Invoice {
-    
+
     private int invoiceID;
     private Order order;
-    private Date invoiceDate;
+    private LocalDateTime invoiceDate; // Updated to use LocalDateTime
     private double totalAmount;
     private List<Item> itemizedDetails;
     private double taxAmount;
     private double discountsApplied;
-    
+
     public Invoice(Order order, List<Item> itemizedDetails, double taxAmount, double discountsApplied) {
         this.order = order;
         this.itemizedDetails = itemizedDetails;
         this.taxAmount = taxAmount;
         this.discountsApplied = discountsApplied;
-        this.invoiceDate = new Date();  // Set current date as invoice date
+        this.invoiceDate = LocalDateTime.now(); // Set current date and time as invoice date
         this.generateInvoiceID();
     }
-    
+
     // Method to generate invoice ID
     private void generateInvoiceID() {
         // Logic to generate unique invoice ID (can be sequential or random)
-        this.invoiceID = (int) (Math.random() * 10000);  // Simple example of random generation
+        this.invoiceID = (int) (Math.random() * 10000); // Simple example of random generation
     }
 
     // Method to calculate total amount (items + tax - discounts)
@@ -47,12 +47,12 @@ public class Invoice {
         this.calculateTotalAmount(); // Ensure the total amount is calculated before generating
         // Logic for generating invoice (could involve saving to a database or other processes)
     }
-    
+
     // Method to print the invoice (just an example, could be more detailed)
     public void printInvoice() {
         System.out.println("Invoice ID: " + invoiceID);
         System.out.println("Order ID: " + order.getOrderID());
-        System.out.println("Invoice Date: " + invoiceDate);
+        System.out.println("Invoice Date: " + invoiceDate); // Prints the LocalDateTime
         System.out.println("Total Amount: " + totalAmount);
         System.out.println("Tax Amount: " + taxAmount);
         System.out.println("Discounts Applied: " + discountsApplied);
@@ -71,7 +71,7 @@ public class Invoice {
         return order;
     }
 
-    public Date getInvoiceDate() {
+    public LocalDateTime getInvoiceDate() { // Updated getter
         return invoiceDate;
     }
 
