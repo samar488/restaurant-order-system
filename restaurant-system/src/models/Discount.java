@@ -63,4 +63,12 @@ public class Discount {
     public void setValidUntil(LocalDate validUntil) {
         this.validUntil = validUntil;
     }
+    @Override
+    public String toString() {
+        return "Discount{" +
+                "discountPercentage=" + discountPercentage +
+                ", discountCode='" + discountCode + '\'' +
+                ", validUntil=" + validUntil +
+                '}';
+    }
 }

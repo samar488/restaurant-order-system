@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package models;
-public enum Order_Statues {
+public enum OrderStatues {
        PENDING,      // Order is placed but not confirmed
        CONFIRMED,    // Order is confirmed and processing
        CANCELLED,    // Order has been cancelled

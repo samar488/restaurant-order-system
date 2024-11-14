@@ -1,0 +1,17 @@
+[
+    {
+        "discountPercentage": 20.0,
+        "discountCode": "BLACKFRIDAY20",
+        "validUntil": "2024-11-30"
+    },
+    {
+        "discountPercentage": 15.0,
+        "discountCode": "HOLIDAY15",
+        "validUntil": "2024-12-25"
+    },
+    {
+        "discountPercentage": 10.0,
+        "discountCode": "WINTER10",
+        "validUntil": "2025-01-15"
+    }
+]

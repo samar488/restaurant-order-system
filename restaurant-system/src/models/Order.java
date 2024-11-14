@@ -11,17 +11,13 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-enum OrderStatus {
-    PENDING, CONFIRMED, CANCELLED, DELIVERED
-}
-
 public class Order {
     private int orderID;
     private User user;
     private List<Item> orderItems;
     private double totalPrice;
     private Address deliveryAddress;
-    private OrderStatus orderStatus;
+    private OrderStatues orderStatus;
 
     // Constructor
     public Order(int orderID, User user, List<Item> orderItems, Address deliveryAddress) {
@@ -29,7 +25,7 @@ public class Order {
         this.user = user;
         this.orderItems = new ArrayList<>(orderItems);
         this.deliveryAddress = deliveryAddress;
-        this.orderStatus = OrderStatus.PENDING;
+        this.orderStatus = OrderStatues.PENDING;
         this.totalPrice = calculateTotalPrice();
     }
 
@@ -53,7 +49,7 @@ public class Order {
         return deliveryAddress;
     }
 
-    public OrderStatus getOrderStatus() {
+    public OrderStatues getOrderStatus() {
         return orderStatus;
     }
 
@@ -77,7 +73,7 @@ public class Order {
         this.deliveryAddress = deliveryAddress;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatues(OrderStatues orderStatus) {
         this.orderStatus = orderStatus;
     }
     
@@ -87,8 +83,8 @@ public class Order {
 
     
     public void cancelOrder() {
-        if (this.orderStatus == OrderStatus.PENDING) {
-            this.orderStatus = OrderStatus.CANCELLED;
+        if (this.orderStatus == OrderStatues.PENDING) {
+            this.orderStatus = OrderStatues.CANCELLED;
             System.out.println("Order " + orderID + " has been cancelled.");
         } else {
             System.out.println("Order " + orderID + " cannot be cancelled.");
@@ -96,7 +92,7 @@ public class Order {
     }
 
     
-    public void updateOrderStatus(OrderStatus status) {
+    public void updateOrderStatus(OrderStatues status) {
         this.orderStatus = status;
         System.out.println("Order " + orderID + " status updated to " + status);
     }
