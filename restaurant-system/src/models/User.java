@@ -117,5 +117,11 @@ public class User {
             System.out.println("  - Order ID: " + order.getOrderID() + ", Total Price: " + order.getTotalPrice());
         }
     }
+    
+    @Override
+    public String toString() {
+        return "User{id=" + userID + ", name='" + name + "', Address='" + address + "'}";
+}
+
 }
 

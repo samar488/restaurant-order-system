@@ -109,4 +109,14 @@ public class PaymentTransaction {
     public boolean isDiscountApplied() {
         return isDiscountApplied;
     }
+    
+    @Override
+    public String toString() {
+        return "PaymentTransaction{ID=" + paymentTransactionID + 
+           ", orderID=" + order.getOrderID() +
+           ", amount=" + amount +
+           ", totalCost=" + totalCost +
+           ", status='" + transactionStatus + '\'' +
+           ", date=" + transactionDate + '}';
+}
 }
