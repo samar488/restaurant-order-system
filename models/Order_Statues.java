@@ -8,7 +8,7 @@ package project;
  *
  * @author pc
  */
-public enum OrderStatues {
+public enum Order_Statues {
        PENDING,      // Order is placed but not confirmed
        CONFIRMED,    // Order is confirmed and processing
        CANCELLED,    // Order has been cancelled
