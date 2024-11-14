@@ -45,7 +45,16 @@ public class Menu {
     }
 
     
-    public List<Item> getItems() {
-        return new ArrayList<>(items);
+    public void getItems() {
+//        return new ArrayList<>(items);
+         if (items.isEmpty()) {
+            System.out.println("The menu is empty.");
+        } else {
+            System.out.println("Menu Items:");
+            for (Item item : items) {
+                item.displayItemInfo(); 
+                System.out.println("---------------------");  
+            }
+        }
     }
 }
