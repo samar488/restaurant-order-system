@@ -11,58 +11,84 @@ public class Invoice {
 
     private int invoiceID;
     private Order order;
-    private LocalDateTime invoiceDate; // Updated to use LocalDateTime
+    private LocalDateTime invoiceDate;
     private double totalAmount;
     private List<Item> itemizedDetails;
     private double taxAmount;
     private double discountsApplied;
 
     public Invoice(Order order, List<Item> itemizedDetails, double taxAmount, double discountsApplied) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null.");
+        }
+        if (itemizedDetails == null || itemizedDetails.isEmpty()) {
+            throw new IllegalArgumentException("Itemized details cannot be null or empty.");
+        }
+        if (taxAmount < 0 || discountsApplied < 0) {
+            throw new IllegalArgumentException("Tax amount and discounts applied must be non-negative.");
+        }
+
         this.order = order;
         this.itemizedDetails = itemizedDetails;
         this.taxAmount = taxAmount;
         this.discountsApplied = discountsApplied;
-        this.invoiceDate = LocalDateTime.now(); // Set current date and time as invoice date
+        this.invoiceDate = LocalDateTime.now();
         this.generateInvoiceID();
     }
 
-    // Method to generate invoice ID
     private void generateInvoiceID() {
-        // Logic to generate unique invoice ID (can be sequential or random)
-        this.invoiceID = (int) (Math.random() * 10000); // Simple example of random generation
+        this.invoiceID = (int) (Math.random() * 10000);
     }
 
-    // Method to calculate total amount (items + tax - discounts)
     public double calculateTotalAmount() {
-        double itemsTotal = 0;
-        for (Item item : itemizedDetails) {
-            itemsTotal += item.getPrice();
+        try {
+            double itemsTotal = 0;
+            for (Item item : itemizedDetails) {
+                if (item == null) {
+                    throw new IllegalArgumentException("Item in the itemized details cannot be null.");
+                }
+                itemsTotal += item.getPrice();
+            }
+            totalAmount = itemsTotal + taxAmount - discountsApplied;
+            if (totalAmount < 0) {
+                throw new IllegalArgumentException("Total amount cannot be negative.");
+            }
+            return totalAmount;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error calculating total amount: " + e.getMessage());
+            throw e; // Rethrow the exception after logging it
         }
-        totalAmount = itemsTotal + taxAmount - discountsApplied;
-        return totalAmount;
     }
 
-    // Method to generate the invoice
     public void generateInvoice() {
-        this.calculateTotalAmount(); // Ensure the total amount is calculated before generating
-        // Logic for generating invoice (could involve saving to a database or other processes)
-    }
-
-    // Method to print the invoice (just an example, could be more detailed)
-    public void printInvoice() {
-        System.out.println("Invoice ID: " + invoiceID);
-        System.out.println("Order ID: " + order.getOrderID());
-        System.out.println("Invoice Date: " + invoiceDate); // Prints the LocalDateTime
-        System.out.println("Total Amount: " + totalAmount);
-        System.out.println("Tax Amount: " + taxAmount);
-        System.out.println("Discounts Applied: " + discountsApplied);
-        System.out.println("Itemized Details: ");
-        for (Item item : itemizedDetails) {
-            System.out.println("- " + item.getName() + " | Price: " + item.getPrice());
+        try {
+            this.calculateTotalAmount(); // Ensure the total amount is calculated
+            // Additional logic to save the invoice, e.g., to a database, can be added here.
+        } catch (Exception e) {
+            System.err.println("Error generating invoice: " + e.getMessage());
         }
     }
 
-    // Getter methods
+    public void printInvoice() {
+        try {
+            System.out.println("Invoice ID: " + invoiceID);
+            System.out.println("Order ID: " + order.getOrderID());
+            System.out.println("Invoice Date: " + invoiceDate);
+            System.out.println("Total Amount: " + totalAmount);
+            System.out.println("Tax Amount: " + taxAmount);
+            System.out.println("Discounts Applied: " + discountsApplied);
+            System.out.println("Itemized Details: ");
+            for (Item item : itemizedDetails) {
+                if (item == null) {
+                    throw new IllegalArgumentException("Item in the itemized details cannot be null.");
+                }
+                System.out.println("- " + item.getName() + " | Price: " + item.getPrice());
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error printing invoice: " + e.getMessage());
+        }
+    }
+
     public int getInvoiceID() {
         return invoiceID;
     }
@@ -71,7 +97,7 @@ public class Invoice {
         return order;
     }
 
-    public LocalDateTime getInvoiceDate() { // Updated getter
+    public LocalDateTime getInvoiceDate() {
         return invoiceDate;
     }
 
@@ -91,4 +117,5 @@ public class Invoice {
         return discountsApplied;
     }
 }
+
 

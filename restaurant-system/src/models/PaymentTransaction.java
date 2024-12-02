@@ -20,6 +20,19 @@ public class PaymentTransaction {
 
     // Constructor
     public PaymentTransaction(Order order, String paymentMethod, double amount, String transactionType) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null.");
+        }
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than 0.");
+        }
+        if (paymentMethod == null || paymentMethod.isEmpty()) {
+            throw new IllegalArgumentException("Payment method cannot be null or empty.");
+        }
+        if (transactionType == null || transactionType.isEmpty()) {
+            throw new IllegalArgumentException("Transaction type cannot be null or empty.");
+        }
+
         this.paymentTransactionID = generateTransactionID();
         this.order = order;
         this.paymentMethod = paymentMethod;
@@ -33,16 +46,22 @@ public class PaymentTransaction {
 
     // Method to apply a discount
     public void discountApplied(double discountPercentage) {
-        if (!isDiscountApplied) {
-            double discountAmount = (totalCost * discountPercentage) / 100;
-            totalCost -= discountAmount;
-            isDiscountApplied = true;
+        if (discountPercentage < 0 || discountPercentage > 100) {
+            throw new IllegalArgumentException("Discount percentage must be between 0 and 100.");
         }
+        if (isDiscountApplied) {
+            throw new IllegalStateException("Discount has already been applied.");
+        }
+        double discountAmount = (totalCost * discountPercentage) / 100;
+        totalCost -= discountAmount;
+        isDiscountApplied = true;
     }
 
     // Method to process the payment
     public void paymentProcess() {
-        // Logic to process the payment based on the payment method
+        if (paymentMethod == null || paymentMethod.isEmpty()) {
+            throw new IllegalStateException("Payment method must be specified before processing.");
+        }
         if ("CreditCard".equalsIgnoreCase(paymentMethod) || "PayPal".equalsIgnoreCase(paymentMethod)) {
             // Simulate payment process (This would typically involve integration with a payment gateway)
             transactionStatus = "COMPLETED";
@@ -53,7 +72,9 @@ public class PaymentTransaction {
 
     // Method to display transaction history
     public void transactionHistory() {
-        // Logic to display transaction details (could be integrated with a database or console output)
+        if (order == null) {
+            throw new IllegalStateException("Transaction must be associated with an order.");
+        }
         System.out.println("Transaction ID: " + paymentTransactionID);
         System.out.println("Order ID: " + order.getOrderID());
         System.out.println("Amount: $" + amount);
@@ -70,6 +91,9 @@ public class PaymentTransaction {
 
     // Method to calculate total cost
     private double calculateTotalCost() {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than 0.");
+        }
         return amount; // In practice, this could include fees, taxes, etc.
     }
 
@@ -102,21 +126,23 @@ public class PaymentTransaction {
         return transactionStatus;
     }
 
-    public LocalDateTime getTransactionDate() { // Updated getter
+    public LocalDateTime getTransactionDate() {
         return transactionDate;
     }
 
     public boolean isDiscountApplied() {
         return isDiscountApplied;
     }
-    
+
     @Override
     public String toString() {
-        return "PaymentTransaction{ID=" + paymentTransactionID + 
-           ", orderID=" + order.getOrderID() +
-           ", amount=" + amount +
-           ", totalCost=" + totalCost +
-           ", status='" + transactionStatus + '\'' +
-           ", date=" + transactionDate + '}';
-}
+        return "PaymentTransaction{" +
+                "ID=" + paymentTransactionID +
+                ", orderID=" + order.getOrderID() +
+                ", amount=" + amount +
+                ", totalCost=" + totalCost +
+                ", status='" + transactionStatus + '\'' +
+                ", date=" + transactionDate +
+                '}';
+    }
 }
