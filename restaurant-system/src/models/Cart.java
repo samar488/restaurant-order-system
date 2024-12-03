@@ -7,81 +7,66 @@ import java.util.List;
     @author Mohamed Yasser
  */
 public class Cart {
-    
+
     // Attributes
     private int cartID;
-    private User user; // Reference to the associated User ==  Reference to User who owns the cart
-    private List<Item> cartItems; // List to store items added to the cart == Items in the cart
+    private User user; 
+    private List<Item> cartItems; 
 
     // Constructor
     public Cart(int cartID, User user) {
         this.cartID = cartID;
         this.user = user;
-        this.cartItems = new ArrayList<>(); // Initialize an empty cart
+        this.cartItems = new ArrayList<>();
     }
 
     // Method to add an item to the cart
     public void addItem(Item item) {
-        cartItems.add(item);
-        System.out.println(item.getName() + " added to the cart.");
+        try {
+            if (item == null) {
+                throw new IllegalArgumentException("Item cannot be null");
+            }
+            cartItems.add(item);
+            System.out.println(item.getName() + " added to the cart.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error adding item to cart: " + e.getMessage());
+        }
     }
 
     // Method to remove an item from the cart
     public void removeItem(Item item) {
-        if (cartItems.contains(item)) {
+        try {
+            if (item == null) {
+                throw new IllegalArgumentException("Item cannot be null");
+            }
+            if (!cartItems.contains(item)) {
+                throw new ItemNotFoundException("Item not found in cart: " + item.getName());
+            }
             cartItems.remove(item);
             System.out.println(item.getName() + " removed from the cart.");
-        } else {
-            System.out.println(item.getName() + " is not in the cart.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error removing item: " + e.getMessage());
+        } catch (ItemNotFoundException e) {
+            System.err.println(e.getMessage());
         }
     }
-
-       /*
-       // Remove an item from the cart
-    public void removeItem(Item item) {
-        if (cartItems.remove(item)) {
-            System.out.println("Item '" + item.getName() + "' removed from cart.");
-        } else {
-            System.out.println("Item '" + item.getName() + "' not found in cart.");
-        }
-    }
-       */
 
     // Method to calculate the total cost of items in the cart
     public double calculateTotal() {
-        double total = 0;
-        for (Item item : cartItems) {
-            total += item.getPrice();
-        }
-        return total;
-    }
-
-/*
-    // Method to apply a discount (if applicable)
-    public double applyDiscount(double discountPercentage) {
-        double total = calculateTotal();
-        double discount = total * (discountPercentage / 100);
-        return total - discount;
-    }
-
-    // Method to clear the cart
-    public void clearCart() {
-        cartItems.clear();
-        System.out.println("Cart has been cleared.");
-    }
-
-    // Method to display all items in the cart
-    public void displayCartItems() {
-        if (cartItems.isEmpty()) {
-            System.out.println("Cart is empty.");
-            return;
-        }
-        System.out.println("Items in the cart:");
-        for (Item item : cartItems) {
-            System.out.println("- " + item.getName() + " : " + item.getPrice());
+        try {
+            if (cartItems.isEmpty()) {
+                throw new EmptyCartException("Cart is empty, cannot calculate total");
+            }
+            double total = 0;
+            for (Item item : cartItems) {
+                total += item.getPrice();
+            }
+            return total;
+        } catch (EmptyCartException e) {
+            System.err.println(e.getMessage());
+            return 0.0;
         }
     }
-*/
 
     // Getters and Setters
     public int getCartID() {
@@ -107,5 +92,17 @@ public class Cart {
     public void setCartItems(List<Item> cartItems) {
         this.cartItems = cartItems;
     }
-    
+
+    // Custom exceptions
+    public static class ItemNotFoundException extends Exception {
+        public ItemNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public static class EmptyCartException extends Exception {
+        public EmptyCartException(String message) {
+            super(message);
+        }
+    }
 }
