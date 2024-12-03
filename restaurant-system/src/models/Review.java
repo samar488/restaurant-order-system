@@ -18,6 +18,15 @@ public class Review {
     private static List<Review> reviews = new ArrayList<>(); // store all reviews
     
     public Review(int reviewID, User user, Item item, int rating, String comment) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null.");
+        }
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null.");
+        }
+        if (rating < 1 || rating > 5) {
+            throw new IllegalArgumentException("Rating must be between 1 and 5.");
+        }
         this.reviewID = reviewID;
         this.user = user;
         this.item = item;
@@ -55,14 +64,23 @@ public class Review {
     }
 
     public void setUser(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null.");
+        }
         this.user = user;
     }
 
     public void setItem(Item item) {
+         if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null.");
+        }
         this.item = item;
     }
 
     public void setRating(int rating) {
+        if (rating < 1 || rating > 5) {
+            throw new IllegalArgumentException("Rating must be between 1 and 5.");
+        }
         this.rating = rating;
     }
 
@@ -71,15 +89,30 @@ public class Review {
     }
 
     public static void setReviews(List<Review> reviews) {
+        if (reviews == null) {
+            throw new IllegalArgumentException("Reviews list cannot be null.");
+        }
         Review.reviews = reviews;
     }
     
      public static void addReview(int reviewID, User user, Item item, int rating, String comment) {
+         if (user == null) {
+            throw new IllegalArgumentException("User cannot be null.");
+        }
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null.");
+        }
+        if (rating < 1 || rating > 5) {
+            throw new IllegalArgumentException("Rating must be between 1 and 5.");
+        }
         Review newReview = new Review(reviewID, user, item, rating, comment);
         reviews.add(newReview);
     }
      
     public static double getAverageRatingForItem(Item item) {
+         if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null.");
+        }
         int totalRating = 0;
         int count = 0;
         for (Review review : reviews) {
