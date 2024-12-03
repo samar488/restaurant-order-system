@@ -21,12 +21,18 @@ public class Menu {
 
     
     protected void addItem(Item item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null.");
+        }
         items.add(item);
         System.out.println(item.getName() + " has been added to the menu.");
     }
 
     
     protected void removeItem(Item item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null.");
+        }
         if (items.remove(item)) {
             System.out.println(item.getName() + " has been removed from the menu.");
         } else {
@@ -36,6 +42,12 @@ public class Menu {
 
     
     protected void updateItem(Item item, double newPrice) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null.");
+        }
+        if (newPrice <= 0) {
+            throw new IllegalArgumentException("Price must be greater than 0.");
+        }
         if (items.contains(item)) {
             item.setPrice(newPrice);
             System.out.println(item.getName() + " has been updated with a new price.");
