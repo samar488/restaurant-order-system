@@ -22,6 +22,11 @@ public class User {
     private List<Order> orderHistory; // List to store orders placed by the user
 // Constructor
     public User(String name, String userID, String username, String password, Address address) {
+         if (name == null || name.isEmpty() || userID == null || userID.isEmpty() || 
+            username == null || username.isEmpty() || password == null || password.isEmpty() || 
+            address == null) {
+            throw new IllegalArgumentException("Invalid input: None of the fields can be null or empty.");
+        }
         this.name = name;
         this.userID = userID;
         this.username = username;
@@ -38,6 +43,9 @@ public class User {
     }
 
     public void setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Invalid name: Name cannot be null or empty.");
+        }
         this.name = name;
     }
 
@@ -46,6 +54,9 @@ public class User {
     }
 
     public void setUserID(String userID) {
+         if (userID == null || userID.isEmpty()) {
+            throw new IllegalArgumentException("Invalid userID: UserID cannot be null or empty.");
+        }
         this.userID = userID;
     }
 
@@ -54,6 +65,9 @@ public class User {
     }
 
     public void setUsername(String username) {
+         if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Invalid username: Username cannot be null or empty.");
+        }
         this.username = username;
     }
 
@@ -62,6 +76,9 @@ public class User {
     }
 
     public void setPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("Invalid password: Password cannot be null or empty.");
+        }
         this.password = password;
     }
 
@@ -70,6 +87,9 @@ public class User {
     }
 
     public void setAddress(Address address) {
+         if (address == null) {
+            throw new IllegalArgumentException("Invalid address: Address cannot be null.");
+        }
         this.address = address;
     }
 
@@ -96,12 +116,18 @@ public class User {
     }
 //Method 2(  Update profile details)
  public void updateProfile(Address newAddress, String newPassword) {
+      if (newAddress == null || newPassword == null || newPassword.isEmpty()) {
+            throw new IllegalArgumentException("Invalid input: Address and password cannot be null or empty.");
+        }
         this.address = newAddress;
         this.password = newPassword;
         System.out.println("Profile updated successfully.");
     }
  //Method 2(Update order history)
  public void updateHistory(Order newOrder) {
+     if (newOrder == null) {
+            throw new IllegalArgumentException("Invalid order: Order cannot be null.");
+        }
         this.orderHistory.add(newOrder);
         System.out.println("Order history updated.");
     }
